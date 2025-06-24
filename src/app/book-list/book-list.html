@@ -1,0 +1,27 @@
+<h2>Book List</h2>
+@if (books.length) {
+<table class="table table-hover">
+    <thead>
+        <th>#</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Pages</th>
+    </thead>
+    <tbody>
+        @for (book of books; track book.id) {
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>
+                    <a routerLink="/detail/{{book.id}}" class="link-offset-2 link-underline link-underline-opacity-0">
+                        {{ book.title }}</a>
+                </td>
+                <td>{{ book.author }}</td>
+                <td> {{book.pages }}</td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+@else {
+    <p>No books yet!</p>
+}

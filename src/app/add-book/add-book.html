@@ -1,0 +1,25 @@
+
+<h2>New book</h2>
+<form class="d-flex flex-column gap-4 my-4">
+    <fieldset>
+        <label for="new-book-title" class="form-label">Title:</label>
+        <input id="new-book-title" #bookTitle class="form-control" type="text"/>
+    </fieldset>
+
+    <fieldset>
+        <label for="new-book-author" class="form-label">Author:</label>
+        <input id="new-book-author" #bookAuthor class="form-control" type="text"/>
+    </fieldset>
+
+    <fieldset>
+        <label for="new-book-pages" class="form-label">Pages:</label>
+        <input id="new-book-pages" #bookPages class="form-control" type="number"/>
+    </fieldset>
+
+
+</form>
+
+<button type="button" class="btn btn-primary" 
+    (click)="add(bookTitle.value, bookAuthor.value, +bookPages.value)">
+    Save
+</button>

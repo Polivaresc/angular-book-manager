@@ -1,0 +1,12 @@
+<div>
+@if (book) {
+    <h2>Book {{ book.id }} Detail</h2>
+    <label for="title" class="form-label">Book title:</label>
+    <input type="text" id="title" [(ngModel)]="book.title" placeholder="title" class="form-control">
+
+    <div class="d-flex gap-3 mt-3">
+        <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
+        <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+    </div>
+}
+</div>
