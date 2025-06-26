@@ -18,4 +18,11 @@ export class BookList {
     this.bookService.getBooks()
     .subscribe(books => this.books = books);
   }
+
+  delete(book: Book): void {
+    if (book && book.id !== undefined) {
+      this.books = this.books.filter(b => b !== book);
+      this.bookService.deleteBook(book.id).subscribe();
+    }
+  }
 }

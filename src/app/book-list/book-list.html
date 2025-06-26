@@ -16,7 +16,12 @@
                         {{ book.title }}</a>
                 </td>
                 <td>{{ book.author }}</td>
-                <td> {{book.pages }}</td>
+                <td>{{ book.pages }}</td>
+                <td><button 
+                    class="btn btn-outline-danger btn-sm" title="delete book"
+                    type="button" (click)="delete(book)">
+                    <i class="fa-solid fa-trash"></i>                    
+                </button></td>
             </tr>
         }
     </tbody>

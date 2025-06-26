@@ -41,4 +41,10 @@ export class BookDetail {
         .subscribe(()=> this.goBack());
     }
   }
+
+  delete(): void {
+    if (this.book && this.book.id !== undefined) {
+      this.bookService.deleteBook(this.book.id).subscribe(() => this.goBack());
+    }
+  }
 }

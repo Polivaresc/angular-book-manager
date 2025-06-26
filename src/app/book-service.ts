@@ -50,6 +50,14 @@ export class BookService {
       );
   }
 
+  deleteBook(id: number): Observable<Book> {
+    const url = `${this.booksUrl}/${id}`;
+    return this.http.delete<Book>(url, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Book>('deleteBook'))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

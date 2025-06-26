@@ -5,8 +5,17 @@
     <input type="text" id="title" [(ngModel)]="book.title" placeholder="title" class="form-control">
 
     <div class="d-flex gap-3 mt-3">
-        <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
-        <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+        <button 
+            type="button" class="btn btn-primary btn-sm" (click)="save()">
+            <i class="fa-solid fa-floppy-disk me-2"></i>Save
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm me-2" (click)="goBack()">
+            <i class="fa-solid fa-backward me-2"></i>Back
+        </button>
+        <button 
+            class="btn btn-outline-danger btn-sm" type="button" (click)="delete()">
+            <i class="fa-solid fa-trash me-2"></i>Delete               
+        </button>
     </div>
 }
 </div>
