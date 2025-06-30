@@ -1,9 +1,10 @@
 <header>
   <h1>{{ title }}</h1>
-  <nav class="d-flex gap-4">
-    <a routerLink="/books" class="link-offset-2 link-underline link-underline-opacity-0">Books</a>
-    <a routerLink="/add-book" class="link-offset-2 link-underline link-underline-opacity-0">Add book</a>
+  <nav class="my-4 nav nav-tabs">
+    <a routerLink="/books" class="nav-link">Books</a>
+    <a routerLink="/add-book" class="nav-link">Add book</a>
   </nav>
+  <app-search></app-search>
 </header>
 
 <main class="mt-5">

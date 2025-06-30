@@ -1,0 +1,25 @@
+<div>
+    <label for="search-box" class="form-label">
+        <i class="fa-solid fa-magnifying-glass me-2"></i>
+        Search book
+    </label>
+    <input 
+        id="search-box" 
+        #searchBox 
+        (input)="search(searchBox.value)" 
+        class="form-control"
+        placeholder="title"
+        />
+
+    <ul class="list-group">
+        @for (book of books$ | async; track book.id) {
+            <li class="list-group-item list-group-item-action">
+                <a routerLink="/detail/{{ book.id }}" 
+                    class="link-underline link-underline-opacity-0" 
+                    (click)="clearInput(searchBox)">
+                    {{ book.title }}, {{ book.author }}
+                </a>
+            </li>
+        }
+    </ul>
+</div>

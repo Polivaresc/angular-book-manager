@@ -1,6 +1,6 @@
 <div>
 @if (book) {
-    <h2>Book {{ book.id }} Detail</h2>
+    <h2>Book #{{ book.id }} Detail</h2>
     <label for="title" class="form-label">Book title:</label>
     <input type="text" id="title" [(ngModel)]="book.title" placeholder="title" class="form-control">
 

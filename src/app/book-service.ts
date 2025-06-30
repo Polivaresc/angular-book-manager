@@ -58,6 +58,19 @@ export class BookService {
       );
   }
 
+  searchBooks(term: string): Observable<Book[]> {
+    if (!term.trim()) { 
+      return of([]); 
+    }
+
+    const url = `${this.booksUrl}/?title=${term}`;
+
+    return this.http.get<Book[]>(url)
+      .pipe(
+        catchError(this.handleError<Book[]>('searchBooks', []))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
