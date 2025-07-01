@@ -3,28 +3,28 @@
 <form class="d-flex flex-column gap-4 my-4">
     <fieldset>
         <label for="new-book-title" class="form-label">Title:</label>
-        <input id="new-book-title" #bookTitle class="form-control" type="text" required/>
-        @if (invalidData[0].active) {
-            <div>{{ invalidData[0].errorMessage }}</div>
+        <input id="new-book-title" #bookTitle class="form-control" type="text" (input)="validateTitle(bookTitle.value)"/>
+        @if (invalidData['missingTitle'].isActive) {
+            <div>{{ invalidData['missingTitle'].errorMessage }}</div>
         }
     </fieldset>
 
     <fieldset>
         <label for="new-book-author" class="form-label">Author:</label>
-        <input id="new-book-author" #bookAuthor class="form-control" type="text"/>
-        @if (invalidData[1].active) {
-            <div>{{ invalidData[1].errorMessage }}</div>
+        <input id="new-book-author" #bookAuthor class="form-control" type="text" (input)="validateAuthor(bookAuthor.value)"/>
+        @if (invalidData['missingAuthor'].isActive) {
+            <div>{{ invalidData['missingAuthor'].errorMessage }}</div>
         }
     </fieldset>
 
     <fieldset>
         <label for="new-book-pages" class="form-label">Pages:</label>
-        <input id="new-book-pages" #bookPages class="form-control" type="number"/>
-        @if (invalidData[2].active) {
-            <div>{{ invalidData[2].errorMessage }}</div>
+        <input id="new-book-pages" #bookPages class="form-control" type="number" (input)="validatePages(+bookPages.value)"/>
+        @if (invalidData['missingPages'].isActive) {
+            <div>{{ invalidData['missingPages'].errorMessage }}</div>
         }
-        @else if (invalidData[3].active) {
-            <div>{{ invalidData[3].errorMessage }}</div>
+        @else if (invalidData['invalidPages'].isActive) {
+            <div>{{ invalidData['invalidPages'].errorMessage }}</div>
         }
     </fieldset>
 

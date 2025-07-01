@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { BookService } from '../book-service';
 import { Book } from '../../book';
-import { InvalidData } from '../invalidData';
+import { InvalidData, InvalidDataMap } from '../invalidData';
 
 @Component({
   selector: 'app-add-book',
@@ -15,12 +15,12 @@ import { InvalidData } from '../invalidData';
 export class AddBook {
     books: Book[] = [];
 
-    invalidData: InvalidData[] = [
-      { errorCode: 1, errorType: 'missingTitle', errorMessage: 'Title is required', active: false},
-      { errorCode: 2, errorType: 'missingAuthor', errorMessage: 'Author is required', active: false},
-      { errorCode: 3, errorType: 'missingPages', errorMessage: 'Number of pages is required', active: false},
-      { errorCode: 4, errorType: 'invalidPages', errorMessage: 'Number of pages must be a number above 0', active: false}
-    ];
+    invalidData: InvalidDataMap = {
+      'missingTitle': { errorCode: 1, errorMessage: 'Title is required', isActive: false },
+      'missingAuthor': { errorCode: 2, errorMessage: 'Author is required', isActive: false },
+      'missingPages': { errorCode: 3, errorMessage: 'Number of pages is required', isActive: false},
+      'invalidPages': { errorCode: 4, errorMessage: 'Number of pages must be a number above 0', isActive: false }
+    };
 
     constructor(private bookService: BookService, private router: Router) {}
   
@@ -32,7 +32,8 @@ export class AddBook {
    add(title: string, author: string, pages: number): void {
     title = title.trim();
     author = author.trim();
-    this.validate(title, author, pages);
+
+    this.validateForm(title, author, pages);
 
     if (!title || !author || pages <= 0) {
       return; 
@@ -47,31 +48,26 @@ export class AddBook {
       })
   }
 
-  validate(title: string, author: string, pages: number): void {
+  validateField(fieldKey: keyof InvalidDataMap, condition: boolean): void {
+    this.invalidData[fieldKey].isActive = condition;
+  }
 
-    if (!title) {
-      this.invalidData.map(error => error.errorType === 'missingTitle' ? error.active = true : false);
-    } else {
-      this.invalidData.map(error => error.errorType === 'missingTitle' ? error.active = false : true);
-    }
+  validateTitle(title: string): void {
+    this.validateField('missingTitle', !title.trim());
+  }
 
-    if (!author) {
-      this.invalidData.map(error => error.errorType === 'missingAuthor' ? error.active = true : false);
-    } else {
-      this.invalidData.map(error => error.errorType === 'missingAuthor' ? error.active = false : true);
-    }
+  validateAuthor(author: string): void {
+    this.validateField('missingAuthor', !author.trim());
+  }
 
-    if (!pages) {
-      this.invalidData.map(error => error.errorType === 'missingPages' ? error.active = true : false);
-    } else {
-      this.invalidData.map(error => error.errorType === 'missingPages' ? error.active = false : true);
-    }
+  validatePages(pages: number): void {
+    this.validateField('missingPages', !pages);
+    this.validateField('invalidPages', pages <= 0);
+  }
 
-    if (pages <= 0) {
-      this.invalidData.map(error => error.errorType === 'invalidPages' ? error.active = true : false);
-    } else {
-      this.invalidData.map(error => error.errorType === 'invalidPages' ? error.active = false : true);
-    }
-
+  validateForm(title: string, author: string, pages: number): void {
+    this.validateTitle(title);
+    this.validateAuthor(author);
+    this.validatePages(pages);
   }
 }

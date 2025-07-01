@@ -1,6 +1,9 @@
 export interface InvalidData {
     errorCode: number;
-    errorType: string;
     errorMessage: string;
-    active: boolean
+    isActive: boolean
+}
+
+export type InvalidDataMap = {
+    [errorType: string]: InvalidData;
 }
