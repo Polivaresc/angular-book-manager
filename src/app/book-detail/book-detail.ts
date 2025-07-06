@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 
 import { BookService } from '../book-service';
 import { Book } from '../../book';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-book-detail',
@@ -19,7 +20,8 @@ export class BookDetail {
   constructor (
     private route: ActivatedRoute,
     private bookService: BookService,
-    private location: Location
+    private location: Location,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class BookDetail {
   delete(): void {
     if (this.book && this.book.id !== undefined) {
       this.bookService.deleteBook(this.book.id).subscribe(() => this.goBack());
+      this.snackBar.open(`Book #${this.book.id} deleted`, 'Close', {duration: 3000});
     }
   }
 }
