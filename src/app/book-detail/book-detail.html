@@ -1,19 +1,43 @@
 <div>
 @if (book) {
     <h2>Book #{{ book.id }} Detail</h2>
-    <label for="title" class="form-label">Book title:</label>
-    <input type="text" id="title" placeholder="title" class="form-control"
-        required
-        [(ngModel)]="book.title" 
-        #bookTitle="ngModel">
+    <div class="d-flex flex-column gap-4 my-4">
+        <fieldset>
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" placeholder="title" class="form-control" required [(ngModel)]="book.title"
+                #bookTitle="ngModel">
+    
+            @if (bookTitle.invalid) {
+            <div class="text-danger">Title cannot be empty</div>
+            }
+        </fieldset>
+    
+        <fieldset>
+            <label for="author" class="form-label">Author:</label>
+            <input type="text" id="author" placeholder="author" class="form-control" required [(ngModel)]="book.author"
+                #bookAuthor="ngModel">
+    
+            @if (bookAuthor.invalid) {
+            <div class="text-danger">Author cannot be empty</div>
+            }
+        </fieldset>
 
-    @if (bookTitle.invalid) {
-        <div class="text-danger">Title cannot be empty</div>
-    }
+        <fieldset>
+            <label for="pages" class="form-label">Pages:</label>
+            <input type="number" min="1" id="pages" placeholder="123" class="form-control" required [(ngModel)]="book.pages"
+                #bookPages="ngModel">
+    
+            @if (bookPages.invalid) {
+            <div class="text-danger">Pages must be a number above 0</div>
+            }
+        </fieldset>
+    
+    </div>
+
 
     <div class="d-flex gap-3 mt-3">
         <button 
-            type="button" class="btn btn-primary btn-sm" (click)="save()" [disabled]="bookTitle.invalid">
+            type="button" class="btn btn-primary btn-sm" (click)="save()" [disabled]="bookTitle.invalid || bookAuthor.invalid || bookPages.invalid">
             <i class="fa-solid fa-floppy-disk me-2"></i>Save
         </button>
         <button type="button" class="btn btn-secondary btn-sm me-2" (click)="goBack()">

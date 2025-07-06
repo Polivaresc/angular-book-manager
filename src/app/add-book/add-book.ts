@@ -56,8 +56,13 @@ export class AddBook {
       })
   }
 
+  invalidForm(): boolean {
+    return Object.values(this.invalidData).some(error=> error.isActive);
+  }
+
   validateField(fieldKey: keyof InvalidDataMap, condition: boolean): void {
     this.invalidData[fieldKey].isActive = condition;
+    this.invalidForm();
   }
 
   validateTitle(title: string): void {

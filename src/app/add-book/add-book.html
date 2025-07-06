@@ -1,37 +1,41 @@
-
 <h2>New book</h2>
 <form class="d-flex flex-column gap-4 my-4">
     <fieldset>
         <label for="new-book-title" class="form-label">Title:</label>
-        <input id="new-book-title" #bookTitle class="form-control" type="text" (input)="validateTitle(bookTitle.value)"/>
+        <input id="new-book-title" #bookTitle class="form-control" type="text"
+            (input)="validateTitle(bookTitle.value)" placeholder="title"/>
+            
         @if (invalidData['missingTitle'].isActive) {
-            <div class="text-danger">{{ invalidData['missingTitle'].errorMessage }}</div>
+        <div class="text-danger">{{ invalidData['missingTitle'].errorMessage }}</div>
         }
     </fieldset>
 
     <fieldset>
         <label for="new-book-author" class="form-label">Author:</label>
-        <input id="new-book-author" #bookAuthor class="form-control" type="text" (input)="validateAuthor(bookAuthor.value)"/>
+        <input id="new-book-author" #bookAuthor class="form-control" type="text"
+            (input)="validateAuthor(bookAuthor.value)" placeholder="author"/>
+
         @if (invalidData['missingAuthor'].isActive) {
-            <div class="text-danger">{{ invalidData['missingAuthor'].errorMessage }}</div>
+        <div class="text-danger">{{ invalidData['missingAuthor'].errorMessage }}</div>
         }
     </fieldset>
 
     <fieldset>
         <label for="new-book-pages" class="form-label">Pages:</label>
-        <input id="new-book-pages" #bookPages class="form-control" type="number" (input)="validatePages(+bookPages.value)"/>
+        <input id="new-book-pages" #bookPages class="form-control" type="number"
+            (input)="validatePages(+bookPages.value)" placeholder="123"/>
+
         @if (invalidData['missingPages'].isActive) {
-            <div class="text-danger">{{ invalidData['missingPages'].errorMessage }}</div>
+        <div class="text-danger">{{ invalidData['missingPages'].errorMessage }}</div>
         }
         @else if (invalidData['invalidPages'].isActive) {
-            <div class="text-danger">{{ invalidData['invalidPages'].errorMessage }}</div>
+        <div class="text-danger">{{ invalidData['invalidPages'].errorMessage }}</div>
         }
     </fieldset>
 
 
 </form>
 
-<button type="button" class="btn btn-primary" 
-    (click)="add(bookTitle.value, bookAuthor.value, +bookPages.value)">
+<button type="button" class="btn btn-primary" (click)="add(bookTitle.value, bookAuthor.value, +bookPages.value)" [disabled]="invalidForm()">
     <i class="fa-solid fa-square-plus me-2"></i>Add
 </button>
