@@ -8,6 +8,9 @@
         @if (invalidData['missingTitle'].isActive) {
         <div class="text-danger">{{ invalidData['missingTitle'].errorMessage }}</div>
         }
+        @else if (invalidData['existingBook'].isActive) {
+        <div class="text-danger">{{ invalidData['existingBook'].errorMessage }}</div>
+        }
     </fieldset>
 
     <fieldset>
