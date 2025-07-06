@@ -6,6 +6,9 @@ import { Location } from '@angular/common';
 
 import { BookService } from '../book-service';
 import { Book } from '../../book';
+import { ConfirmationDialog } from '../confirmation-dialog/confirmation-dialog';
+
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -21,7 +24,8 @@ export class BookDetail {
     private route: ActivatedRoute,
     private bookService: BookService,
     private location: Location,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +47,22 @@ export class BookDetail {
         .subscribe(()=> this.goBack());
     }
   }
+
+  confirmDelete(book: Book) {
+      const dialogRef = this.dialog.open(ConfirmationDialog, {
+        data: {
+          message: `Do you want to delete book #${book.id}?`,
+          confirmButton: 'Confirm',
+          cancelButton: 'Cancel'
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          this.delete();
+        }
+      });
+    }
+  
 
   delete(): void {
     if (this.book && this.book.id !== undefined) {

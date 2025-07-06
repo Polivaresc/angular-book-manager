@@ -1,0 +1,17 @@
+<div class="d-flex flex-column align-items-center gap-3 p-4">
+    <div>
+        {{ message }}
+    </div>
+
+    <div class="d-flex gap-2">
+        <button class="btn btn-primary btn-sm" (click)="onConfirmClick()">
+            <i class="fa-solid fa-check"></i>
+            {{ confirmButton }}
+        </button>
+        <button class="btn btn-outline-secondary btn-sm" (click)="onCancelClick()">
+            <i class="fa-solid fa-xmark"></i>
+                {{ cancelButton }}
+        </button>
+    </div>
+</div>
+

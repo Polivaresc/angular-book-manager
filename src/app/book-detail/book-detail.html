@@ -40,11 +40,11 @@
             type="button" class="btn btn-primary btn-sm" (click)="save()" [disabled]="bookTitle.invalid || bookAuthor.invalid || bookPages.invalid">
             <i class="fa-solid fa-floppy-disk me-2"></i>Save
         </button>
-        <button type="button" class="btn btn-secondary btn-sm me-2" (click)="goBack()">
+        <button type="button" class="btn btn-outline-secondary btn-sm me-2" (click)="goBack()">
             <i class="fa-solid fa-backward me-2"></i>Back
         </button>
         <button 
-            class="btn btn-outline-danger btn-sm" type="button" (click)="delete()">
+            class="btn btn-outline-danger btn-sm" type="button" (click)="confirmDelete(book)">
             <i class="fa-solid fa-trash me-2"></i>Delete               
         </button>
     </div>

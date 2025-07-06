@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { BookService } from '../book-service';
 import { Book } from '../../book';
+import { ConfirmationDialog } from '../confirmation-dialog/confirmation-dialog';
 
 @Component({
   selector: 'app-book-list',
@@ -23,7 +25,8 @@ export class BookList {
 
   constructor(
     private bookService: BookService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +52,21 @@ export class BookList {
     });
 
     this.snackBar.open(`Books sorted by ${key}`, 'Close', {duration: 2000});
+  }
+
+  confirmDelete(book: Book) {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        message: `Do you want to delete book #${book.id}?`,
+        confirmButton: 'Confirm',
+        cancelButton: 'Cancel'
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.delete(book);
+      }
+    });
   }
 
   delete(book: Book): void {
