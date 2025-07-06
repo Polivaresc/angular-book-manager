@@ -2,9 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { BookService } from '../book-service';
 import { Book } from '../../book';
-import { InvalidData, InvalidDataMap } from '../invalidData';
+import { InvalidDataMap } from '../invalidData';
+
 
 @Component({
   selector: 'app-add-book',
@@ -22,7 +25,11 @@ export class AddBook {
       'invalidPages': { errorCode: 4, errorMessage: 'Number of pages must be a number above 0', isActive: false }
     };
 
-    constructor(private bookService: BookService, private router: Router) {}
+    constructor(
+      private bookService: BookService, 
+      private router: Router,
+      private snackBar: MatSnackBar
+    ) {}
   
     ngOnInit(): void {
       this.bookService.getBooks()
@@ -44,6 +51,7 @@ export class AddBook {
     this.bookService.addBook(newBook)
       .subscribe(book => {
         this.books.push(book);
+        this.snackBar.open('Book added successfully!', 'Close', {duration: 4000});
         this.router.navigate(['/books']);
       })
   }
