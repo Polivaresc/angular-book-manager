@@ -38,12 +38,7 @@ export class AddBook {
     }
 
    add(title: string, author: string, pages: number): void {
-    title = title.trim();
-    author = author.trim();
-
-    this.validateForm(title, author, pages);
-
-    if (!title || !author || pages <= 0) {
+    if (!this.validateForm(title, author, pages)) {
       return; 
     } 
 
@@ -57,33 +52,46 @@ export class AddBook {
       })
   }
 
-  invalidForm(): boolean {
+  isFormInvalid(): boolean {
     return Object.values(this.invalidData).some(error=> error.isActive);
   }
 
-  validateField(fieldKey: keyof InvalidDataMap, condition: boolean): void {
+  setFieldValidity(fieldKey: keyof InvalidDataMap, condition: boolean): void {
     this.invalidData[fieldKey].isActive = condition;
-    this.invalidForm();
+    this.isFormInvalid();
   }
 
-  validateTitle(title: string): void {
-    const titles = this.books.map(b => b.title);
-    this.validateField('existingBook', titles.some((t) => t.toUpperCase() === title.trim().toUpperCase()));
-    this.validateField('missingTitle', !title.trim());
+  validateTitle(title: string, author?: string): void {
+    this.setFieldValidity('missingTitle', !title.trim());
+    if (author) {
+      this.validateExistingBook(title, author);
+    }
   }
 
-  validateAuthor(author: string): void {
-    this.validateField('missingAuthor', !author.trim());
+  validateAuthor(author: string, title?: string): void {
+    this.setFieldValidity('missingAuthor', !author.trim());
+    if (title) {
+      this.validateExistingBook(title, author);
+    }
   }
 
   validatePages(pages: number): void {
-    this.validateField('missingPages', !pages);
-    this.validateField('invalidPages', pages <= 0);
+    this.setFieldValidity('missingPages', !pages);
+    this.setFieldValidity('invalidPages', pages <= 0);
   }
 
-  validateForm(title: string, author: string, pages: number): void {
+  validateExistingBook(title: string, author: string): void {
+    const duplicate: boolean = this.books.some((book) => 
+      book.title.toUpperCase() === title.trim().toUpperCase() &&
+      book.author.toUpperCase() === author.trim().toUpperCase()
+    )
+    this.setFieldValidity('existingBook', duplicate);
+  }
+
+  validateForm(title: string, author: string, pages: number): boolean {
     this.validateTitle(title);
     this.validateAuthor(author);
     this.validatePages(pages);
+    return !this.isFormInvalid();
   }
 }

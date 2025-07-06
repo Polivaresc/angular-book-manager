@@ -3,7 +3,7 @@
     <fieldset>
         <label for="new-book-title" class="form-label">Title:</label>
         <input id="new-book-title" #bookTitle class="form-control" type="text"
-            (input)="validateTitle(bookTitle.value)" placeholder="title"/>
+            (input)="validateTitle(bookTitle.value, bookAuthor.value)" placeholder="title"/>
             
         @if (invalidData['missingTitle'].isActive) {
         <div class="text-danger">{{ invalidData['missingTitle'].errorMessage }}</div>
@@ -16,7 +16,7 @@
     <fieldset>
         <label for="new-book-author" class="form-label">Author:</label>
         <input id="new-book-author" #bookAuthor class="form-control" type="text"
-            (input)="validateAuthor(bookAuthor.value)" placeholder="author"/>
+            (input)="validateAuthor(bookAuthor.value, bookTitle.value)" placeholder="author"/>
 
         @if (invalidData['missingAuthor'].isActive) {
         <div class="text-danger">{{ invalidData['missingAuthor'].errorMessage }}</div>
@@ -35,11 +35,9 @@
         <div class="text-danger">{{ invalidData['invalidPages'].errorMessage }}</div>
         }
     </fieldset>
-
-
 </form>
 
 <button type="button" class="btn btn-primary" (click)="add(bookTitle.value, bookAuthor.value, +bookPages.value)"
-    [disabled]="invalidForm()">
+    [disabled]="isFormInvalid()">
     <i class="fa-solid fa-square-plus me-2"></i>Add
 </button>
