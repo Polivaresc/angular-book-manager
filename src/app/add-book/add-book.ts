@@ -51,7 +51,7 @@ export class AddBook {
     this.bookService.addBook(newBook)
       .subscribe(book => {
         this.books.push(book);
-        this.snackBar.open('Book added successfully!', 'Close', {duration: 4000});
+        this.snackBar.open('Book added successfully!', 'Close', {duration: 3000});
         this.router.navigate(['/books']);
       })
   }

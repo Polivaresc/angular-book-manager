@@ -2,10 +2,16 @@
 @if (books.length) {
 <table class="table table-hover">
     <thead>
-        <th>#</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Pages</th>
+        @for (header of headers; track header.key) {
+            <th>
+                {{ header.label }}
+                <button 
+                    class="btn btn-sm text-secondary"
+                    (click)="sortBooks(header.key)">
+                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+                </button>
+            </th>
+        }
     </thead>
     <tbody>
         @for (book of books; track book.id) {
