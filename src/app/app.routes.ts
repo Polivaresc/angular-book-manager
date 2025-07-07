@@ -6,6 +6,7 @@ import { AddBook } from './add-book/add-book';
 export const routes: Routes = [
     { path: '', redirectTo: '/books', pathMatch: 'full'},
     { path: 'books', component: BookList },
+    { path: 'favorites',  component: BookList, data: {showFavorites: true}},
     { path: 'add-book', component: AddBook},
     { path: 'detail/:id', component: BookDetail}
 ];

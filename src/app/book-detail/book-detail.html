@@ -1,6 +1,17 @@
 <div>
 @if (book) {
-    <h2>Book #{{ book.id }} Detail</h2>
+    <div class="d-flex align-items-center gap-2">
+        <h2 class="m-0">Book #{{ book.id }} Detail</h2>
+        <button class="btn p-0 m-0" (click)="toggleIsFavorite(book)">
+            @if (book.isFavorite) {
+            <i class="text-warning fa-solid fa-star fa-lg"></i>
+            }
+            @else {
+            <i class="text-warning fa-regular fa-star fa-lg"></i>
+            }
+        </button>
+    </div>
+
     <div class="d-flex flex-column gap-4 my-4">
         <fieldset>
             <label for="title" class="form-label">Title:</label>

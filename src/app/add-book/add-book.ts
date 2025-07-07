@@ -6,7 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BookService } from '../book-service';
 import { Book } from '../../book';
-import { InvalidDataMap } from '../invalidData';
+import { InvalidDataMap } from '../../invalidData';
+import { INVALID_DATA } from '../../invalid-form-data';
 
 
 @Component({
@@ -17,14 +18,7 @@ import { InvalidDataMap } from '../invalidData';
 })
 export class AddBook {
     books: Book[] = [];
-
-    invalidData: InvalidDataMap = {
-      'missingTitle': { errorCode: 1, errorMessage: 'Title is required', isActive: false },
-      'missingAuthor': { errorCode: 2, errorMessage: 'Author is required', isActive: false },
-      'missingPages': { errorCode: 3, errorMessage: 'Number of pages is required', isActive: false},
-      'invalidPages': { errorCode: 4, errorMessage: 'Number of pages must be a number above 0', isActive: false },
-      'existingBook': { errorCode: 5, errorMessage: 'This book is already in the list', isActive: false }
-    };
+    invalidData: InvalidDataMap = INVALID_DATA;
 
     constructor(
       private bookService: BookService, 
@@ -42,7 +36,7 @@ export class AddBook {
       return; 
     } 
 
-    const newBook: Book = { title, author, pages };
+    const newBook: Book = { isFavorite: false, title, author, pages };
 
     this.bookService.addBook(newBook)
       .subscribe(book => {

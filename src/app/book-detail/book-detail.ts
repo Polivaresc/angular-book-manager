@@ -41,6 +41,16 @@ export class BookDetail {
     this.location.back();
   }
 
+   toggleIsFavorite(book: Book): void {
+    book.isFavorite = !book.isFavorite;
+    this.bookService.updateBook(book).subscribe();
+    if (book.isFavorite) {
+      this.snackBar.open(`Book #${book.id} added to favorites`, 'Close', {duration: 2000});
+    } else {
+      this.snackBar.open(`Book #${book.id} removed from favorites`, 'Close', {duration: 2000});
+    }
+  }
+
   save(): void {
     if (this.book) {
       this.bookService.updateBook(this.book)

@@ -1,5 +1,9 @@
-<h2>Book List</h2>
-@if (books.length) {
+<h2>
+@if (showOnlyFavorites) { Favorite Books } 
+@else { Book List }
+</h2>
+
+@if (filteredBooks.length > 0) {
 <table class="table table-hover">
     <thead>
         @for (header of headers; track header.key) {
@@ -14,9 +18,19 @@
         }
     </thead>
     <tbody>
-        @for (book of books; track book.id) {
+        @for (book of filteredBooks; track book.id) {
             <tr>
                 <td>{{ book.id }}</td>
+                <td><button
+                    class="btn p-0 m-0"
+                    (click)="toggleIsFavorite(book)">
+                    @if (book.isFavorite) {
+                    <i class="text-warning fa-solid fa-star"></i>
+                    }
+                    @else {
+                    <i class="text-warning fa-regular fa-star"></i>
+                    }
+                </button></td>
                 <td>
                     <a routerLink="/detail/{{book.id}}" class="link-underline link-underline-opacity-0">
                         {{ book.title }}</a>
@@ -34,5 +48,8 @@
 </table>
 }
 @else {
-    <p>No books yet!</p>
+    <p>
+    @if (showOnlyFavorites) { No favorite books yet! } 
+    @else { No books yet! }
+    </p>
 }
