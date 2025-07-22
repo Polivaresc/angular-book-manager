@@ -1,59 +1,9 @@
 # AngularBookManager
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
+This is a Book Manager application built with Angular. The main objective of this project was to deepen understanding of Angular fundamentals by creating a CRUD interface to manage a list of books.
 
-## Development server
+The app allows users to add, edit, and delete books with built-in validation to prevent duplicate entries. Angular services are used for data handling and reactive forms ensure a dynamic user experience.
 
-To start a local development server, run:
+For styling, Bootstrap was used to create a clean and responsive layout. Angular Material was also integrated for toast-style notifications, enhancing the user feedback and interface interactivity.
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project was part of a learning journey before moving on to more complex Angular applications.
