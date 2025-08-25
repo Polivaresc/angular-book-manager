@@ -11,4 +11,5 @@ import { Search } from './search/search';
 })
 export class App {
   protected title = 'angular-book-manager';
+  isLoggedIn: boolean = false;
 }

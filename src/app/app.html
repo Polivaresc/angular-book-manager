@@ -4,6 +4,13 @@
     <a routerLink="/books" class="nav-link">Books</a>
     <a routerLink="/favorites" class="nav-link">Favorites</a>
     <a routerLink="/add-book" class="nav-link">Add book</a>
+    
+    @if (isLoggedIn) {
+      <a routerLink="/books">Logout</a>
+    }
+    @else {
+      <a routerLink="/login">Login</a>
+    }
   </nav>
   <app-search></app-search>
 </header>

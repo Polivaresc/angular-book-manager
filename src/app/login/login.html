@@ -1,0 +1,29 @@
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+       <h2>Login</h2>
+
+       <fieldset>
+            <label for="username">Username</label>
+            <input type="text" id="username" formControlName="username" required title="Username required">
+
+            @if (username?.invalid && username?.touched) {
+                <div>Username is required</div>
+            }
+        </fieldset>
+
+        <fieldset>
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" required  title="Password required">
+        
+            @if (password?.invalid && password?.touched) {
+                <div>Password is required</div>
+            }
+        </fieldset>
+
+        @if (loginError) {
+            <div>{{ loginError }}</div>
+        }
+
+        <button type="submit">Access</button>
+    </form>
+</div>
